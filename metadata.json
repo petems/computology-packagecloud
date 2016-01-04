@@ -9,6 +9,10 @@
   "issues_url": "https://github.com/computology/computology-packagecloud/issues",
   "dependencies": [
     {
+      "name": "puppetlabs-apt",
+      "version_requirement": ">= 1.8.0 <= 3.0.0"
+    },
+    {
       "version_range": ">= 1.0.0",
       "name": "puppetlabs-stdlib"
     }
