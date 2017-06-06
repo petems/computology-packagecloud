@@ -25,6 +25,7 @@ define packagecloud::repo(
   $priority = undef,
   $metadata_expire = 300,
   $server_address = 'https://packagecloud.io',
+  $force_refresh = true,
 ) {
   validate_string($type)
   validate_string($master_token)
@@ -143,6 +144,14 @@ define packagecloud::repo(
             path    => '/usr/bin',
             require => File[$normalized_name],
           }
+
+          unless $force_refresh {
+            Exec["yum_make_cache_${repo_name}"]{
+              subscribe   => File[$normalized_name],
+              refreshonly => true,
+            }
+          }
+
         }
 
         default: {
